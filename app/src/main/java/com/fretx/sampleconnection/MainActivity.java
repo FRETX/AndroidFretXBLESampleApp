@@ -69,8 +69,10 @@ public class MainActivity extends AppCompatActivity implements BluetoothListener
                 if (com != null)
                     if (lightOn) {
                         com.send(clearBytes);
+                        send.setText(R.string.switch_on);
                     } else {
                         com.send(lightBytes);
+                        send.setText(R.string.switch_off);
                     }
             }
         });
