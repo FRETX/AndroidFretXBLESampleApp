@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity implements BluetoothListener
     private static final int MY_PERMISSIONS_REQUEST_COARSE_LOCATION = 1;
 
     private static final byte clearBytes[] = new byte[] {0};
-    private static final byte lightBytes[] = new byte[] {46,35,24,12,01,41,32,23,15,06};
+    private static final byte lightBytes[] = new byte[] {46,35,24,12,01,41,32,23,15,06, 0};
 
     private TextView status;
     private Button action;
@@ -68,9 +68,11 @@ public class MainActivity extends AppCompatActivity implements BluetoothListener
             public void onClick(View v) {
                 if (com != null)
                     if (lightOn) {
+                        lightOn = false;
                         com.send(clearBytes);
                         send.setText(R.string.switch_on);
                     } else {
+                        lightOn = true;
                         com.send(lightBytes);
                         send.setText(R.string.switch_off);
                     }
