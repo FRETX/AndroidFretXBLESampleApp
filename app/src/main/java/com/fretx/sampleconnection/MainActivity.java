@@ -62,11 +62,6 @@ public class MainActivity extends AppCompatActivity implements BluetoothListener
         send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Random random = new Random();
-                byte data[] = new byte[2];
-                int value = random.nextInt(NB_FRET) * 10 + random.nextInt(NB_STRING);
-                data[0] = (byte)(value & 0xFF);
-                data[1] = 0;
             }
         });
 
