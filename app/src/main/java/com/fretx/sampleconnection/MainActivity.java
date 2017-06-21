@@ -56,6 +56,8 @@ public class MainActivity extends AppCompatActivity implements BluetoothListener
                     if (com.isConnected()) {
                         com.disconnect();
                         send.setVisibility(View.INVISIBLE);
+                        //Please note that the FretX device turns itself off when disconnected from the app
+                        //To reconnect, press the power button again on the device
                     } else {
                         status.setText(R.string.scanning_status);
                         com.connect();
