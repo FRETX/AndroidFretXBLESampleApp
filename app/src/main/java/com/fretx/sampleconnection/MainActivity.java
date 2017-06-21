@@ -28,9 +28,13 @@ public class MainActivity extends AppCompatActivity implements BluetoothListener
     private static final int NB_STRING = 6;
     private static final int MY_PERMISSIONS_REQUEST_COARSE_LOCATION = 1;
 
+    private static final byte clearBytes[] = new byte[] {0};
+    private static final byte lightBytes[] = new byte[] {46,35,24,12,01,41,32,23,15,06};
+
     private TextView status;
     private Button action;
     private Button send;
+    private boolean lightOn;
 
     private BluetoothInterface com;
     private BluetoothListener listener = this;
@@ -62,6 +66,12 @@ public class MainActivity extends AppCompatActivity implements BluetoothListener
         send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (com != null)
+                    if (lightOn) {
+                        com.send(clearBytes);
+                    } else {
+                        com.send(lightBytes);
+                    }
             }
         });
 
@@ -176,6 +186,7 @@ public class MainActivity extends AppCompatActivity implements BluetoothListener
     private Runnable disconnectedRunnable = new Runnable() {
         @Override
         public void run() {
+            lightOn = false;
             status.setText(R.string.disconnected_status);
             action.setText(R.string.connect_action);
             send.setVisibility(View.INVISIBLE);
